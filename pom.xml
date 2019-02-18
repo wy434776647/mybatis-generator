@@ -1,8 +1,8 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.zzg</groupId>
-    <artifactId>mybatis-generator-gui</artifactId>
+    <groupId>com.zmor</groupId>
+    <artifactId>mybatis-generator</artifactId>
     <version>0.8.5</version>
 
     <properties>
@@ -89,7 +89,7 @@
                         <!-- mac打包开启-->
                         <icon>${project.basedir}/package/macosx/mybatis-generator-gui.icns</icon>
                     </bundleArguments>
-                    <mainClass>com.zzg.mybatis.generator.MainUI</mainClass>
+                    <mainClass>com.zmor.mybatis.generator.MainUI</mainClass>
                     <vendor>Owen Zou</vendor>
                     <verbose>false</verbose>
                     <jfxMainAppJarName>mybatis-generator-gui.jar</jfxMainAppJarName>
