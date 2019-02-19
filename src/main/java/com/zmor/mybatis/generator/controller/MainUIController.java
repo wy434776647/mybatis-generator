@@ -84,6 +84,7 @@ public class MainUIController extends BaseFXController {
     private CheckBox useSchemaPrefix;
     @FXML
     private TreeView<String> leftDBTree;
+
     // Current selected databaseConfig
     private DatabaseConfig selectedDatabaseConfig;
     // Current selected tableName
@@ -102,7 +103,8 @@ public class MainUIController extends BaseFXController {
     private CheckBox tkMapper;
     @FXML
     private CheckBox lombok;
-
+    @FXML
+    private TextField author;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         ImageView dbImage = new ImageView("icons/computer.png");
@@ -341,6 +343,7 @@ public class MainUIController extends BaseFXController {
         generatorConfig.setUseTkMapper(tkMapper.isSelected());
         generatorConfig.setLombok(lombok.isSelected());
         generatorConfig.setBaseMapper(baseMapper.getText());
+        generatorConfig.setAuthor(author.getText());
         return generatorConfig;
     }
 
@@ -357,6 +360,7 @@ public class MainUIController extends BaseFXController {
         tkMapper.setSelected(generatorConfig.isUseTkMapper());
         baseMapper.setText(generatorConfig.getBaseMapper());
         lombok.setSelected(generatorConfig.isLombok());
+        author.setText(generatorConfig.getAuthor());
     }
 
     @FXML

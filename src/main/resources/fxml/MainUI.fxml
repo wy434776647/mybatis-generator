@@ -231,6 +231,10 @@
                                                         <Label text="       "/>
                                                         <CheckBox fx:id="lombok" minWidth="100.0"
                                                                   mnemonicParsing="false" selected="true" text="使用lombok"/>
+                                                        <TextField fx:id="author" prefHeight="27.0" prefWidth="248.0"
+                                                                   promptText="注释作者" GridPane.columnIndex="1"
+                                                                   GridPane.rowIndex="5">
+                                                        </TextField>
                                                     </children>
                                                 </HBox>
                                                 <HBox alignment="CENTER_LEFT">

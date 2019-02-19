@@ -15,11 +15,14 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Properties;
 
 /**
  * @author Liweizhou  2018/6/6
  */
 public class LombokPlugin extends PluginAdapter {
+
+    private String author;
 
     @Override
     public boolean validate(List<String> list) {
@@ -31,14 +34,14 @@ public class LombokPlugin extends PluginAdapter {
         //添加domain的import
         topLevelClass.addImportedType("lombok.Data");
 //        topLevelClass.addImportedType("lombok.Builder");
-        topLevelClass.addImportedType("lombok.NoArgsConstructor");
-        topLevelClass.addImportedType("lombok.AllArgsConstructor");
+//        topLevelClass.addImportedType("lombok.NoArgsConstructor");
+//        topLevelClass.addImportedType("lombok.AllArgsConstructor");
 
         //添加domain的注解
         topLevelClass.addAnnotation("@Data");
 //        topLevelClass.addAnnotation("@Builder");
-        topLevelClass.addAnnotation("@NoArgsConstructor");
-        topLevelClass.addAnnotation("@AllArgsConstructor");
+//        topLevelClass.addAnnotation("@NoArgsConstructor");
+//        topLevelClass.addAnnotation("@AllArgsConstructor");
 
         String remarks = "";
         FullyQualifiedTable table = introspectedTable.getFullyQualifiedTable();
@@ -56,7 +59,7 @@ public class LombokPlugin extends PluginAdapter {
         //添加domain的注释
         topLevelClass.addJavaDocLine("/**");
         topLevelClass.addJavaDocLine("* "+ remarks);
-        topLevelClass.addJavaDocLine("* @author wangyang");
+        topLevelClass.addJavaDocLine("* @author " + author);
         topLevelClass.addJavaDocLine("* @date " + date2Str(new Date()));
         topLevelClass.addJavaDocLine("*/");
 
@@ -67,7 +70,7 @@ public class LombokPlugin extends PluginAdapter {
     public boolean clientGenerated(Interface interfaze, TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
         //Mapper文件的注释
         interfaze.addJavaDocLine("/**");
-        interfaze.addJavaDocLine("* @author wangyang");
+        interfaze.addJavaDocLine("* @author " + author);
         interfaze.addJavaDocLine("* @date " + date2Str(new Date()));
         interfaze.addJavaDocLine("*/");
         return true;
@@ -86,7 +89,7 @@ public class LombokPlugin extends PluginAdapter {
     }
 
     private String date2Str(Date date) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm");
         return sdf.format(date);
     }
 
@@ -102,5 +105,15 @@ public class LombokPlugin extends PluginAdapter {
             } catch (SQLException e) {}
         }
 
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    @Override
+    public void setProperties(Properties properties) {
+        super.setProperties(properties);
+        this.author = properties.getProperty("author");
     }
 }

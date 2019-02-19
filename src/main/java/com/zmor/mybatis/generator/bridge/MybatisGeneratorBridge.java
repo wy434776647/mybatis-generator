@@ -195,6 +195,7 @@ public class MybatisGeneratorBridge {
         //使用lombok插件
         if(generatorConfig.isLombok()){
             PluginConfiguration pluginConfiguration = new PluginConfiguration();
+            pluginConfiguration.addProperty("author", generatorConfig.getAuthor());
             pluginConfiguration.setConfigurationType("com.zmor.mybatis.generator.plugins.LombokPlugin");
             context.addPluginConfiguration(pluginConfiguration);
         }
