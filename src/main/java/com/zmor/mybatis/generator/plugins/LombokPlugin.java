@@ -55,10 +55,12 @@ public class LombokPlugin extends PluginAdapter {
                 remarks = rs.getString("COMMENT");
             }
             closeConnection(connection, rs);
-        } catch (SQLException e) {}
+        } catch (SQLException e) {
+        }
         //添加domain的注释
         topLevelClass.addJavaDocLine("/**");
-        topLevelClass.addJavaDocLine("* "+ remarks);
+        topLevelClass.addJavaDocLine("* " + remarks);
+        topLevelClass.addJavaDocLine("*");
         topLevelClass.addJavaDocLine("* @author " + author);
         topLevelClass.addJavaDocLine("* @date " + date2Str(new Date()));
         topLevelClass.addJavaDocLine("*/");
@@ -97,18 +99,16 @@ public class LombokPlugin extends PluginAdapter {
         if (null != rs) {
             try {
                 rs.close();
-            } catch (SQLException e) {}
+            } catch (SQLException e) {
+            }
         }
         if (connection != null) {
             try {
                 connection.close();
-            } catch (SQLException e) {}
+            } catch (SQLException e) {
+            }
         }
 
-    }
-
-    public String getAuthor() {
-        return author;
     }
 
     @Override
