@@ -160,10 +160,10 @@ public class MybatisGeneratorBridge {
         context.addProperty(PropertyRegistry.CONTEXT_JAVA_FILE_ENCODING, generatorConfig.getEncoding());
 
         //实体添加序列化
-        PluginConfiguration serializablePluginConfiguration = new PluginConfiguration();
+        /*PluginConfiguration serializablePluginConfiguration = new PluginConfiguration();
         serializablePluginConfiguration.addProperty("type", "org.mybatis.generator.plugins.SerializablePlugin");
         serializablePluginConfiguration.setConfigurationType("org.mybatis.generator.plugins.SerializablePlugin");
-        context.addPluginConfiguration(serializablePluginConfiguration);
+        context.addPluginConfiguration(serializablePluginConfiguration);*/
         // toString, hashCode, equals插件
         if (generatorConfig.isNeedToStringHashcodeEquals()) {
             PluginConfiguration pluginConfiguration1 = new PluginConfiguration();
@@ -189,7 +189,7 @@ public class MybatisGeneratorBridge {
         if(generatorConfig.isUseTkMapper()){
             PluginConfiguration pluginConfiguration = new PluginConfiguration();
             pluginConfiguration.addProperty("mappers", generatorConfig.getBaseMapper());
-            pluginConfiguration.setConfigurationType("tk.mybatis.mapper.generator.MapperPlugin");
+            pluginConfiguration.setConfigurationType("com.zmor.mybatis.generator.plugins.MyTkMapperPlugin");
             context.addPluginConfiguration(pluginConfiguration);
         }
         //使用lombok插件
