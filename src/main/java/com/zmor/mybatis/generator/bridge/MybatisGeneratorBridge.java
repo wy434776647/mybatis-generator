@@ -160,9 +160,11 @@ public class MybatisGeneratorBridge {
         context.addProperty(PropertyRegistry.CONTEXT_JAVA_FILE_ENCODING, generatorConfig.getEncoding());
 
         //使用jdk1.8  时间
-        JavaTypeResolverConfiguration javaTypeResolverConfiguration = new JavaTypeResolverConfiguration();
-        javaTypeResolverConfiguration.setConfigurationType("com.zmor.mybatis.generator.plugins.JavaTypeResolverJsr310Impl");
-        context.setJavaTypeResolverConfiguration(javaTypeResolverConfiguration);
+        if(generatorConfig.isLocalDate()){
+            JavaTypeResolverConfiguration javaTypeResolverConfiguration = new JavaTypeResolverConfiguration();
+            javaTypeResolverConfiguration.setConfigurationType("com.zmor.mybatis.generator.plugins.JavaTypeResolverJsr310Impl");
+            context.setJavaTypeResolverConfiguration(javaTypeResolverConfiguration);
+        }
 
         //实体添加序列化
         /*PluginConfiguration serializablePluginConfiguration = new PluginConfiguration();

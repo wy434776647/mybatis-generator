@@ -61,6 +61,8 @@ public class GeneratorConfig {
 
     private boolean lombok;
 
+    private boolean localDate;
+
     private String baseMapper;
 
     private String author;
@@ -79,6 +81,14 @@ public class GeneratorConfig {
 
     public void setLombok(boolean lombok) {
         this.lombok = lombok;
+    }
+
+    public boolean isLocalDate() {
+        return localDate;
+    }
+
+    public void setLocalDate(boolean localDate) {
+        this.localDate = localDate;
     }
 
     public String getBaseMapper() {

@@ -104,6 +104,8 @@ public class MainUIController extends BaseFXController {
     @FXML
     private CheckBox lombok;
     @FXML
+    private CheckBox localDate;
+    @FXML
     private TextField author;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -344,6 +346,7 @@ public class MainUIController extends BaseFXController {
         generatorConfig.setLombok(lombok.isSelected());
         generatorConfig.setBaseMapper(baseMapper.getText());
         generatorConfig.setAuthor(author.getText());
+        generatorConfig.setLocalDate(localDate.isSelected());
         return generatorConfig;
     }
 
@@ -360,6 +363,7 @@ public class MainUIController extends BaseFXController {
         tkMapper.setSelected(generatorConfig.isUseTkMapper());
         baseMapper.setText(generatorConfig.getBaseMapper());
         lombok.setSelected(generatorConfig.isLombok());
+        localDate.setSelected(generatorConfig.isLocalDate());
         author.setText(generatorConfig.getAuthor());
     }
 
