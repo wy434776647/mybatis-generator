@@ -6,6 +6,8 @@ import com.zmor.mybatis.generator.model.GeneratorConfig;
 import com.zmor.mybatis.generator.plugins.DbRemarksCommentGenerator;
 import com.zmor.mybatis.generator.util.ConfigHelper;
 import com.zmor.mybatis.generator.util.DbUtil;
+import com.zmor.mybatis.generator.util.FreemarkerUtil;
+import org.apache.commons.lang3.CharSet;
 import org.apache.commons.lang3.StringUtils;
 import org.mybatis.generator.api.MyBatisGenerator;
 import org.mybatis.generator.api.ProgressCallback;
@@ -15,11 +17,10 @@ import org.mybatis.generator.internal.DefaultShellCallback;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.io.*;
+import java.nio.charset.Charset;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * The bridge between GUI and the mybatis generator. All the operation to  mybatis generator should proceed through this
@@ -224,6 +225,50 @@ public class MybatisGeneratorBridge {
         }
 
         myBatisGenerator.generate(progressCallback, contexts, fullyqualifiedTables);
+
+        //生成service
+        if(StringUtils.isNotEmpty(generatorConfig.getMappingXMLPackage()) && generatorConfig.isUseTkMapper()){
+            generateService(generatorConfig);
+        }
+    }
+
+    private void generateService(GeneratorConfig generatorConfig) {
+        Map<String,String> params = new HashMap<>();
+        params.put("package",generatorConfig.getServicePackage());
+        params.put("dataobjectPackge",generatorConfig.getModelPackage());
+        params.put("dataobjectName",generatorConfig.getDomainObjectName());
+        params.put("iServicePath",generatorConfig.getIServicePath());
+        params.put("author",generatorConfig.getAuthor());
+        params.put("date",date2Str(new Date()));
+        params.put("baseServicePath",generatorConfig.getBaseServicePath());
+        params.put("servicePackage",generatorConfig.getServicePackage());
+
+        String serviceHtmlStr = FreemarkerUtil.processString("service.ftl",params);
+        String serviceImplHtmlStr = FreemarkerUtil.processString("service_impl.ftl",params);
+        String serviceFilePath = getServiceFilePath(generatorConfig);
+        File dir = new File(serviceFilePath);
+        if(!dir.exists()){
+            dir.mkdirs();
+        }
+        dir = new File(serviceFilePath+"impl");
+        if(!dir.exists()){
+            dir.mkdirs();
+        }
+        File file = new File(serviceFilePath +generatorConfig.getDomainObjectName()+  "Service.java");
+        File file1 = new File(serviceFilePath + "impl/"+generatorConfig.getDomainObjectName()+  "ServiceImpl.java");
+        try (OutputStream os = new FileOutputStream(file);
+             OutputStream os1 = new FileOutputStream(file1);){
+            os.write(serviceHtmlStr.getBytes("utf-8"));
+            os1.write(serviceImplHtmlStr.getBytes("utf-8"));
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+    private String date2Str(Date date) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+        return sdf.format(date);
     }
 
     private String getMappingXMLFilePath(GeneratorConfig generatorConfig) {
@@ -235,6 +280,17 @@ public class MybatisGeneratorBridge {
             sb.append(mappingXMLPackage.replace(".", "/")).append("/");
         }
         sb.append(generatorConfig.getDomainObjectName()).append("Mapper.xml");
+        return sb.toString();
+    }
+
+    private String getServiceFilePath(GeneratorConfig generatorConfig) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(generatorConfig.getProjectFolder()).append("/");
+        sb.append(generatorConfig.getServiceTargetFolder()).append("/");
+        String servicePackage = generatorConfig.getServicePackage();
+        if (StringUtils.isNotEmpty(servicePackage)) {
+            sb.append(servicePackage.replace(".", "/")).append("/");
+        }
         return sb.toString();
     }
 
