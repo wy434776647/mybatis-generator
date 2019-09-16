@@ -227,7 +227,7 @@ public class MybatisGeneratorBridge {
         myBatisGenerator.generate(progressCallback, contexts, fullyqualifiedTables);
 
         //生成service
-        if(StringUtils.isNotEmpty(generatorConfig.getMappingXMLPackage()) && generatorConfig.isUseTkMapper()){
+        if(StringUtils.isNotEmpty(generatorConfig.getServicePackage()) && generatorConfig.isUseTkMapper()){
             generateService(generatorConfig);
         }
     }
