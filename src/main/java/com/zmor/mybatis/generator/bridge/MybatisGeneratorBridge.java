@@ -7,7 +7,6 @@ import com.zmor.mybatis.generator.plugins.DbRemarksCommentGenerator;
 import com.zmor.mybatis.generator.util.ConfigHelper;
 import com.zmor.mybatis.generator.util.DbUtil;
 import com.zmor.mybatis.generator.util.FreemarkerUtil;
-import org.apache.commons.lang3.CharSet;
 import org.apache.commons.lang3.StringUtils;
 import org.mybatis.generator.api.MyBatisGenerator;
 import org.mybatis.generator.api.ProgressCallback;
@@ -17,8 +16,10 @@ import org.mybatis.generator.internal.DefaultShellCallback;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.*;
-import java.nio.charset.Charset;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -227,7 +228,7 @@ public class MybatisGeneratorBridge {
         myBatisGenerator.generate(progressCallback, contexts, fullyqualifiedTables);
 
         //生成service
-        if(StringUtils.isNotEmpty(generatorConfig.getMappingXMLPackage()) && generatorConfig.isUseTkMapper()){
+        if(StringUtils.isNotEmpty(generatorConfig.getServicePackage()) && generatorConfig.isUseTkMapper()){
             generateService(generatorConfig);
         }
     }
