@@ -6,3 +6,6 @@ logs
 .project
 .classpath
 /config/
+mybatis-plus/mvnw
+*.cmd
+config/sqlite3.db

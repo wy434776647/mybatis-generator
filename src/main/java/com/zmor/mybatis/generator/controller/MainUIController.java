@@ -63,6 +63,14 @@ public class MainUIController extends BaseFXController {
     @FXML
     private TextField daoTargetProject;
     @FXML
+    private TextField serviceTargetPackage;
+    @FXML
+    private TextField serviceTargetProject;
+    @FXML
+    private TextField iServicePath;
+    @FXML
+    private TextField baseServicePath;
+    @FXML
     private TextField projectFolderField;
     @FXML
     private CheckBox offsetLimitCheckBox;
@@ -328,6 +336,10 @@ public class MainUIController extends BaseFXController {
         generatorConfig.setModelPackageTargetFolder(modelTargetProject.getText());
         generatorConfig.setDaoPackage(daoTargetPackage.getText());
         generatorConfig.setDaoTargetFolder(daoTargetProject.getText());
+        generatorConfig.setIServicePath(iServicePath.getText());
+        generatorConfig.setBaseServicePath(baseServicePath.getText());
+        generatorConfig.setServicePackage(serviceTargetPackage.getText());
+        generatorConfig.setServiceTargetFolder(serviceTargetProject.getText());
         generatorConfig.setMappingXMLPackage(mapperTargetPackage.getText());
         generatorConfig.setMappingXMLTargetFolder(mappingTargetProject.getText());
         generatorConfig.setTableName(tableNameField.getText());
@@ -357,6 +369,10 @@ public class MainUIController extends BaseFXController {
         modelTargetProject.setText(generatorConfig.getModelPackageTargetFolder());
         daoTargetPackage.setText(generatorConfig.getDaoPackage());
         daoTargetProject.setText(generatorConfig.getDaoTargetFolder());
+        iServicePath.setText(generatorConfig.getIServicePath());
+        baseServicePath.setText(generatorConfig.getBaseServicePath());
+        serviceTargetPackage.setText(generatorConfig.getServicePackage());
+        serviceTargetProject.setText(generatorConfig.getServiceTargetFolder());
         mapperTargetPackage.setText(generatorConfig.getMappingXMLPackage());
         mappingTargetProject.setText(generatorConfig.getMappingXMLTargetFolder());
         encodingChoice.setValue(generatorConfig.getEncoding());

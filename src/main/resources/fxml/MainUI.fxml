@@ -11,7 +11,7 @@
 <?import javafx.collections.FXCollections?>
 <?import java.lang.*?>
 
-<BorderPane prefHeight="613.0" prefWidth="918.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/8"
+<BorderPane prefHeight="700.0" prefWidth="1080.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/8"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.zmor.mybatis.generator.controller.MainUIController">
     <top>
         <VBox>
@@ -40,11 +40,11 @@
         </VBox>
     </top>
     <center>
-        <SplitPane dividerPositions="0.15">
+        <SplitPane dividerPositions="0.20">
             <items>
-                <AnchorPane maxWidth="500.0" minWidth="100.0" prefHeight="618.0" prefWidth="200.0">
+                <AnchorPane maxWidth="500.0" minWidth="120.0" prefHeight="618.0" prefWidth="220.0">
                     <children>
-                        <TreeView fx:id="leftDBTree" layoutX="-14.0" maxWidth="0.0" prefHeight="545.0" prefWidth="126.0"
+                        <TreeView fx:id="leftDBTree" layoutX="-14.0" maxWidth="0.0" prefHeight="545.0" prefWidth="200.0"
                                   AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
                                   AnchorPane.topAnchor="0.0"/>
                     </children>
@@ -55,17 +55,17 @@
                               AnchorPane.topAnchor="0.0">
                             <children>
                                 <GridPane alignment="TOP_RIGHT" layoutX="5.0" layoutY="29.0" prefHeight="501.0"
-                                          prefWidth="771.0" vgap="5.0" AnchorPane.leftAnchor="-5.0"
+                                          prefWidth="850.0" vgap="5.0" AnchorPane.leftAnchor="-5.0"
                                           AnchorPane.rightAnchor="10.0">
                                     <columnConstraints>
                                         <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="157.0"
                                                            minWidth="132.0" prefWidth="138.0"/>
                                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="688.0" minWidth="10.0"
-                                                           prefWidth="170.0"/>
+                                                           prefWidth="200.0"/>
                                         <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="688.0"
                                                            minWidth="74.0" prefWidth="76.0"/>
                                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="688.0" minWidth="10.0"
-                                                           prefWidth="166.0"/>
+                                                           prefWidth="200.0"/>
                                         <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="688.0"
                                                            minWidth="10.0" prefWidth="129.0"/>
                                     </columnConstraints>
@@ -75,6 +75,8 @@
                                                         vgrow="SOMETIMES"/>
                                         <RowConstraints maxHeight="25.0" minHeight="8.0" prefHeight="25.0"
                                                         vgrow="SOMETIMES"/>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
@@ -195,10 +197,31 @@
                                                 <Insets left="5.0"/>
                                             </GridPane.margin>
                                         </TextField>
-                                        <Label text="Mapper XML文件包名" GridPane.rowIndex="6"/>
-                                        <TextField fx:id="mapperTargetPackage" prefHeight="27.0" prefWidth="248.0"
-                                                   promptText="com.example" GridPane.columnIndex="1"
-                                                   GridPane.rowIndex="6">
+
+                                      <Label text="Service包名" GridPane.rowIndex="6"/>
+                                      <TextField fx:id="serviceTargetPackage" prefHeight="27.0" prefWidth="248.0"
+                                                 promptText="com.example.service" GridPane.columnIndex="1"
+                                                 GridPane.rowIndex="6">
+                                        <HBox.margin>
+                                          <Insets right="5.0"/>
+                                        </HBox.margin>
+                                        <GridPane.margin>
+                                          <Insets left="5.0" right="5.0"/>
+                                        </GridPane.margin>
+                                      </TextField>
+                                      <Label text="存放目录" GridPane.columnIndex="2" GridPane.rowIndex="6"/>
+                                      <TextField fx:id="serviceTargetProject" prefHeight="27.0" prefWidth="155.0"
+                                                 promptText="src/main/java" text="src/main/java"
+                                                 GridPane.columnIndex="3" GridPane.rowIndex="6">
+                                        <GridPane.margin>
+                                          <Insets left="5.0"/>
+                                        </GridPane.margin>
+                                      </TextField>
+
+                                        <Label text="IService路径" GridPane.rowIndex="7"/>
+                                        <TextField fx:id="iServicePath" prefHeight="27.0" prefWidth="248.0"
+                                                   promptText="com.example.IService" GridPane.columnIndex="1"
+                                                   GridPane.rowIndex="7">
                                             <HBox.margin>
                                                 <Insets right="5.0"/>
                                             </HBox.margin>
@@ -206,16 +229,36 @@
                                                 <Insets left="5.0" right="5.0"/>
                                             </GridPane.margin>
                                         </TextField>
-                                        <Label text="存放目录" GridPane.columnIndex="2" GridPane.rowIndex="6"/>
+                                        <Label text="BaseService路径" GridPane.columnIndex="2" GridPane.rowIndex="7"/>
+                                        <TextField fx:id="baseServicePath" prefHeight="27.0" prefWidth="155.0"
+                                                   promptText="com.example.BaseService"
+                                                   GridPane.columnIndex="3" GridPane.rowIndex="7">
+                                            <GridPane.margin>
+                                                <Insets left="5.0"/>
+                                            </GridPane.margin>
+                                        </TextField>
+
+                                        <Label text="Mapper XML文件包名" GridPane.rowIndex="8"/>
+                                        <TextField fx:id="mapperTargetPackage" prefHeight="27.0" prefWidth="248.0"
+                                                   promptText="com.example" GridPane.columnIndex="1"
+                                                   GridPane.rowIndex="8">
+                                            <HBox.margin>
+                                                <Insets right="5.0"/>
+                                            </HBox.margin>
+                                            <GridPane.margin>
+                                                <Insets left="5.0" right="5.0"/>
+                                            </GridPane.margin>
+                                        </TextField>
+                                        <Label text="存放目录" GridPane.columnIndex="2" GridPane.rowIndex="8"/>
                                         <TextField fx:id="mappingTargetProject" prefHeight="27.0" prefWidth="155.0"
                                                    promptText="src/main/resources" text="src/main/resources"
-                                                   GridPane.columnIndex="3" GridPane.rowIndex="6">
+                                                   GridPane.columnIndex="3" GridPane.rowIndex="8">
                                             <GridPane.margin>
                                                 <Insets left="5.0"/>
                                             </GridPane.margin>
                                         </TextField>
                                         <VBox prefHeight="53.0" prefWidth="536.0" spacing="10.0"
-                                              GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.rowIndex="7">
+                                              GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.rowIndex="9">
                                             <children>
                                                 <HBox alignment="CENTER_LEFT">
                                                     <children>
@@ -264,7 +307,7 @@
                                                     </children>
                                                 </HBox>
                                                 <HBox alignment="CENTER_LEFT" spacing="10.0" GridPane.columnIndex="1"
-                                                      GridPane.columnSpan="3" GridPane.rowIndex="8">
+                                                      GridPane.columnSpan="3" GridPane.rowIndex="10">
                                                     <children>
                                                         <CheckBox fx:id="offsetLimitCheckBox" minWidth="100.0"
                                                                   mnemonicParsing="false" selected="false" text="分页"
@@ -303,7 +346,7 @@
                                         </VBox>
                                         <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0"
                                               spacing="10.0" GridPane.columnIndex="1" GridPane.columnSpan="3"
-                                              GridPane.rowIndex="8">
+                                              GridPane.rowIndex="10">
                                             <children>
                                                 <Button mnemonicParsing="false" onAction="#generateCode" text="代码生成">
                                                     <styleClass>
@@ -321,7 +364,7 @@
                                             </children>
                                         </HBox>
                                         <CheckBox fx:id="overrideXML" mnemonicParsing="false" selected="true"
-                                                  text="覆盖原XML" GridPane.columnIndex="4" GridPane.rowIndex="6">
+                                                  text="覆盖原XML" GridPane.columnIndex="4" GridPane.rowIndex="8">
                                             <GridPane.margin>
                                                 <Insets left="10.0"/>
                                             </GridPane.margin>

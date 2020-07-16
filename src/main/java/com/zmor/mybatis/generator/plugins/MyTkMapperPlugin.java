@@ -20,8 +20,6 @@ public class MyTkMapperPlugin extends MapperPlugin {
         mycommentCfg = new CommentGeneratorConfiguration();
         mycommentCfg.setConfigurationType(MyMapperCommentGenerator.class.getCanonicalName());
         context.setCommentGeneratorConfiguration(mycommentCfg);
-        //支持oracle获取注释#114
-        context.getJdbcConnectionConfiguration().addProperty("remarksReporting", "true");
     }
 
 }

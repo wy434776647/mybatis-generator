@@ -1,11 +1,14 @@
 package com.zmor.mybatis.generator.model;
 
+import lombok.Data;
+
 /**
  * GeneratorConfig is the Config of mybatis generator config exclude database
  * config
  * <p>
  * Created by Owen on 6/16/16.
  */
+@Data
 public class GeneratorConfig {
 
     /**
@@ -24,6 +27,14 @@ public class GeneratorConfig {
     private String daoPackage;
 
     private String daoTargetFolder;
+
+    private String iServicePath;
+
+    private String baseServicePath;
+
+    private String serviceTargetFolder;
+
+    private String servicePackage;
 
     private String mapperName;
 
@@ -67,231 +78,5 @@ public class GeneratorConfig {
 
     private String author;
 
-    public String getAuthor() {
-        return author;
-    }
 
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
-    public boolean isLombok() {
-        return lombok;
-    }
-
-    public void setLombok(boolean lombok) {
-        this.lombok = lombok;
-    }
-
-    public boolean isLocalDate() {
-        return localDate;
-    }
-
-    public void setLocalDate(boolean localDate) {
-        this.localDate = localDate;
-    }
-
-    public String getBaseMapper() {
-        return baseMapper;
-    }
-
-    public void setBaseMapper(String baseMapper) {
-        this.baseMapper = baseMapper;
-    }
-
-    public String getMapperName() {
-        return mapperName;
-    }
-
-    public void setMapperName(String mapperName) {
-        this.mapperName = mapperName;
-    }
-
-    public boolean isUseTkMapper() {
-        return useTkMapper;
-    }
-
-    public void setUseTkMapper(boolean useTkMapper) {
-        this.useTkMapper = useTkMapper;
-    }
-
-    public boolean isUseSchemaPrefix() {
-        return useSchemaPrefix;
-    }
-
-    public void setUseSchemaPrefix(boolean useSchemaPrefix) {
-        this.useSchemaPrefix = useSchemaPrefix;
-    }
-
-    public boolean isUseExampe() {
-        return useExampe;
-    }
-
-    public void setUseExampe(boolean useExampe) {
-        this.useExampe = useExampe;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getTableName() {
-        return tableName;
-    }
-
-    public void setTableName(String tableName) {
-        this.tableName = tableName;
-    }
-
-    public String getDomainObjectName() {
-        return domainObjectName;
-    }
-
-    public void setDomainObjectName(String domainObjectName) {
-        this.domainObjectName = domainObjectName;
-    }
-
-    public String getConnectorJarPath() {
-        return connectorJarPath;
-    }
-
-    public void setConnectorJarPath(String connectorJarPath) {
-        this.connectorJarPath = connectorJarPath;
-    }
-
-    public String getProjectFolder() {
-        return projectFolder;
-    }
-
-    public void setProjectFolder(String projectFolder) {
-        this.projectFolder = projectFolder;
-    }
-
-    public String getModelPackage() {
-        return modelPackage;
-    }
-
-    public void setModelPackage(String modelPackage) {
-        this.modelPackage = modelPackage;
-    }
-
-    public String getModelPackageTargetFolder() {
-        return modelPackageTargetFolder;
-    }
-
-    public void setModelPackageTargetFolder(String modelPackageTargetFolder) {
-        this.modelPackageTargetFolder = modelPackageTargetFolder;
-    }
-
-    public String getDaoPackage() {
-        return daoPackage;
-    }
-
-    public void setDaoPackage(String daoPackage) {
-        this.daoPackage = daoPackage;
-    }
-
-    public String getDaoTargetFolder() {
-        return daoTargetFolder;
-    }
-
-    public void setDaoTargetFolder(String daoTargetFolder) {
-        this.daoTargetFolder = daoTargetFolder;
-    }
-
-    public String getMappingXMLPackage() {
-        return mappingXMLPackage;
-    }
-
-    public void setMappingXMLPackage(String mappingXMLPackage) {
-        this.mappingXMLPackage = mappingXMLPackage;
-    }
-
-    public String getMappingXMLTargetFolder() {
-        return mappingXMLTargetFolder;
-    }
-
-    public void setMappingXMLTargetFolder(String mappingXMLTargetFolder) {
-        this.mappingXMLTargetFolder = mappingXMLTargetFolder;
-    }
-
-    public boolean isOffsetLimit() {
-        return offsetLimit;
-    }
-
-    public void setOffsetLimit(boolean offsetLimit) {
-        this.offsetLimit = offsetLimit;
-    }
-
-    public boolean isComment() {
-        return comment;
-    }
-
-    public void setComment(boolean comment) {
-        this.comment = comment;
-    }
-
-    public boolean isNeedToStringHashcodeEquals() {
-        return needToStringHashcodeEquals;
-    }
-
-    public void setNeedToStringHashcodeEquals(boolean needToStringHashcodeEquals) {
-        this.needToStringHashcodeEquals = needToStringHashcodeEquals;
-    }
-
-    public boolean isAnnotation() {
-        return annotation;
-    }
-
-    public void setAnnotation(boolean annotation) {
-        this.annotation = annotation;
-    }
-
-    public boolean isUseActualColumnNames() {
-        return useActualColumnNames;
-    }
-
-    public void setUseActualColumnNames(boolean useActualColumnNames) {
-        this.useActualColumnNames = useActualColumnNames;
-    }
-
-    public String getGenerateKeys() {
-        return generateKeys;
-    }
-
-    public void setGenerateKeys(String generateKeys) {
-        this.generateKeys = generateKeys;
-    }
-
-    public String getEncoding() {
-        return encoding;
-    }
-
-    public void setEncoding(String encoding) {
-        this.encoding = encoding;
-    }
-
-    public boolean getUseTableNameAlias() {
-        return useTableNameAlias;
-    }
-
-    public void setUseTableNameAlias(boolean useTableNameAlias) {
-        this.useTableNameAlias = useTableNameAlias;
-    }
-
-    public boolean isUseTableNameAlias() {
-        return useTableNameAlias;
-    }
-
-    public boolean isOverrideXML() {
-        return overrideXML;
-    }
-
-    public void setOverrideXML(boolean overrideXML) {
-        this.overrideXML = overrideXML;
-    }
 }
