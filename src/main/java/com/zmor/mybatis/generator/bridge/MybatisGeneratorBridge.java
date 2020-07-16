@@ -125,6 +125,10 @@ public class MybatisGeneratorBridge {
         jdbcConfig.setConnectionURL(DbUtil.getConnectionUrlWithSchema(selectedDatabaseConfig));
         jdbcConfig.setUserId(selectedDatabaseConfig.getUsername());
         jdbcConfig.setPassword(selectedDatabaseConfig.getPassword());
+        //支持oracle获取注释#114
+        jdbcConfig.addProperty("remarksReporting", "true");
+        //支持mysql获取注释
+        jdbcConfig.addProperty("useInformationSchema", "true");
         // java model
         JavaModelGeneratorConfiguration modelConfig = new JavaModelGeneratorConfiguration();
         modelConfig.setTargetPackage(generatorConfig.getModelPackage());
@@ -142,7 +146,6 @@ public class MybatisGeneratorBridge {
 
         context.setId("myid");
         context.addTableConfiguration(tableConfig);
-        context.setJdbcConnectionConfiguration(jdbcConfig);
         context.setJdbcConnectionConfiguration(jdbcConfig);
         context.setJavaModelGeneratorConfiguration(modelConfig);
         context.setSqlMapGeneratorConfiguration(mapperConfig);
@@ -227,7 +230,7 @@ public class MybatisGeneratorBridge {
         myBatisGenerator.generate(progressCallback, contexts, fullyqualifiedTables);
 
         //生成service
-        if(StringUtils.isNotEmpty(generatorConfig.getMappingXMLPackage()) && generatorConfig.isUseTkMapper()){
+        if(StringUtils.isNotEmpty(generatorConfig.getServicePackage()) && generatorConfig.isUseTkMapper()){
             generateService(generatorConfig);
         }
     }

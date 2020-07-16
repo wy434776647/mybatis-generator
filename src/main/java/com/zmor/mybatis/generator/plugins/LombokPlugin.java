@@ -32,37 +32,23 @@ public class LombokPlugin extends PluginAdapter {
     @Override
     public boolean modelBaseRecordClassGenerated(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
         //添加domain的import
-        topLevelClass.addImportedType("lombok.Data");
-//        topLevelClass.addImportedType("lombok.Builder");
-//        topLevelClass.addImportedType("lombok.NoArgsConstructor");
+        topLevelClass.addImportedType("lombok.Getter");
+        topLevelClass.addImportedType("lombok.Setter");
+        topLevelClass.addImportedType("lombok.NoArgsConstructor");
 //        topLevelClass.addImportedType("lombok.AllArgsConstructor");
 
         //添加domain的注解
-        topLevelClass.addAnnotation("@Data");
-//        topLevelClass.addAnnotation("@Builder");
-//        topLevelClass.addAnnotation("@NoArgsConstructor");
+        topLevelClass.addAnnotation("@Getter");
+        topLevelClass.addAnnotation("@Setter");
+        topLevelClass.addAnnotation("@NoArgsConstructor");
 //        topLevelClass.addAnnotation("@AllArgsConstructor");
 
-        String remarks = "";
-        FullyQualifiedTable table = introspectedTable.getFullyQualifiedTable();
-        try {
-            Connection connection = new JDBCConnectionFactory(context.getJdbcConnectionConfiguration()).getConnection();
-            ResultSet rs = connection.createStatement().executeQuery(
-                    new StringBuilder().append("SHOW TABLE STATUS LIKE '")
-                            .append(table.getFullyQualifiedTableNameAtRuntime()).append("'").toString());
-
-            if (null != rs && rs.next()) {
-                remarks = rs.getString("COMMENT");
-            }
-            closeConnection(connection, rs);
-        } catch (SQLException e) {
-        }
+        String remarks = introspectedTable.getRemarks();
         //添加domain的注释
         topLevelClass.addJavaDocLine("/**");
         topLevelClass.addJavaDocLine("* " + remarks);
         topLevelClass.addJavaDocLine("*");
         topLevelClass.addJavaDocLine("* @author " + author);
-        topLevelClass.addJavaDocLine("* @date " + date2Str(new Date()));
         topLevelClass.addJavaDocLine("*/");
 
         return true;
@@ -73,7 +59,6 @@ public class LombokPlugin extends PluginAdapter {
         //Mapper文件的注释
         interfaze.addJavaDocLine("/**");
         interfaze.addJavaDocLine("* @author " + author);
-        interfaze.addJavaDocLine("* @date " + date2Str(new Date()));
         interfaze.addJavaDocLine("*/");
         return true;
     }
@@ -88,27 +73,6 @@ public class LombokPlugin extends PluginAdapter {
     public boolean modelGetterMethodGenerated(Method method, TopLevelClass topLevelClass, IntrospectedColumn introspectedColumn, IntrospectedTable introspectedTable, ModelClassType modelClassType) {
         //不生成setter
         return false;
-    }
-
-    private String date2Str(Date date) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm");
-        return sdf.format(date);
-    }
-
-    private void closeConnection(Connection connection, ResultSet rs) {
-        if (null != rs) {
-            try {
-                rs.close();
-            } catch (SQLException e) {
-            }
-        }
-        if (connection != null) {
-            try {
-                connection.close();
-            } catch (SQLException e) {
-            }
-        }
-
     }
 
     @Override
